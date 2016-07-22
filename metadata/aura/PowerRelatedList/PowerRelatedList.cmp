@@ -1,0 +1,86 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" controller="PowerRelatedListCtrl">
+
+	<ltng:require scripts="/resource/lodash" afterScriptsLoaded="{!c.doInit}"/>
+
+	<aura:attribute name="objectName" type="string" required="true" default="Contact" />
+	<aura:attribute name="lookupField" type="string" required="true" default="AccountId"/>
+
+	<aura:attribute name="displayFields" type="string" required="true" default="Name, Phone, Email"/>
+	<aura:attribute name="editableFields" type="string" required="false" default="Phone"/>
+
+	<!--internal only attributes-->
+	<aura:attribute name="recordId" type="String" />
+     <aura:attribute name="sObjectName" type="string"/>
+    <aura:attribute name="parentId" type="String" />
+    <aura:attribute name="parentId_val" type="String" />
+    <aura:attribute name="filter" type="String" />
+	<aura:attribute name="results" type="object[]"/>
+	<aura:attribute name="displayFieldsArray" type="object[]"/>
+	<aura:attribute name="pluralLabel" type="string"/>
+    <aura:attribute name="customLabel" type="string"/>
+
+
+	<div class="slds-card">
+		<div class="slds-card__header slds-grid">
+			<div class="slds-media slds-media--center slds-has-flexi-truncate">
+				<!--placeholder.  TODO:figure out how to get dynamic LEX icons-->
+                <!--div class="slds-media__figure">
+					<svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon*small">
+						<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+					</svg>
+				</div-->
+				<div class="slds-media__body">
+                    <aura:if isTrue="{!v.customLabel}" >
+                        <h2 class="slds-text-heading--small slds-truncate">{!v.customLabel} ({!v.results.length})</h2>
+                    <aura:set attribute="else">    
+						<h2 class="slds-text-heading--small slds-truncate">{!v.pluralLabel} ({!v.results.length})</h2>
+                    </aura:set>
+                    </aura:if>
+				</div>
+			</div>
+			<!-- <div class="slds-no-flex">
+				<div class="slds-button-group">
+					<button class="slds-button slds-button&neutral slds-button&small" onclick="{!c.createRecord}">New</button>					
+				</div>
+			</div> -->
+		</div>
+		<div class="slds-card__body">
+			<table class="slds-table slds-table--bordered slds-no-row-hover slds-table--cell-buffer">
+				<thead>
+					<tr>
+						<aura:iteration items="{!v.displayFieldsArray}" var="field">
+							<th class="slds-text-heading--label" scope="col">
+								<div class="slds-truncate">{!field.describe.label}</div>
+							</th>
+						</aura:iteration>
+					</tr>
+				</thead>
+				<tbody>
+					<aura:iteration items="{!v.results}" var="record">
+						<tr class="slds-hint-parent">
+							
+							<aura:iteration items="{!v.displayFieldsArray}" var="field" start="0" end="1">
+								<td class="{!'slds-size--1-of-' + v.displayFieldsArray.length}" data-label="{!field.describe.label}">
+									<a onclick="{!c.navToRecord}" id="{!record.Id}">
+										<c:SingleFieldDisplayer record="{!record}" fieldDescribe="{!field}"/>
+									</a>
+								</td>
+							</aura:iteration>
+							<aura:iteration items="{!v.displayFieldsArray}" var="field" start="1">
+								<!-- todo:size of based display fields array length -->
+								<td class="{!'slds-size--1-of-' + v.displayFieldsArray.length}" data-label="{!field.describe.label}">
+									<c:SingleFieldDisplayer record="{!record}" fieldDescribe="{!field}"/>
+								</td>
+							</aura:iteration>
+							
+						</tr>
+					</aura:iteration>
+					
+				</tbody>
+			</table>
+		</div>
+		<!-- <div class="slds-card__footer"><a href="javascript:void(0);">View All <span class="slds-assistive-text">entity type</span></a></div> -->
+	</div>
+
+
+</aura:component>
