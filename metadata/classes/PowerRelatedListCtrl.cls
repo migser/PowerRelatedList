@@ -1,5 +1,5 @@
 public with sharing class PowerRelatedListCtrl {
-    
+    //Controlador de Powerrelated list
     @AuraEnabled
     public static string query(String soql,string sObjectName, string parentId, string recordId, String filter) {
         
