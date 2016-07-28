@@ -8,7 +8,7 @@
     
     <!-- type=Image -->
 
-    <aura:if isTrue="{!and(v.fieldDescribe.describe.type == 'string' ,v.record.name =='Respuesta__c')}">
+    <aura:if isTrue="{!and(v.fieldDescribe.describe.type == 'string' ,v.fieldDescribe.describe.name =='Respuesta__c')}">
         <ui:outputRichText value="{!v.simpleOutput}"/>
 
     </aura:if>  
@@ -24,7 +24,7 @@
     </aura:if>    
 -->
     <!-- types=string, phone, email -->
-    <aura:renderif isTrue="{!and(v.fieldDescribe.describe.type == 'string', v.record.name !='Respuesta__c') || v.fieldDescribe.describe.type == 'phone' || v.fieldDescribe.describe.type== 'email' || v.fieldDescribe.describe.type== 'textarea' }">
+    <aura:renderif isTrue="{!and(v.fieldDescribe.describe.type == 'string', v.fieldDescribe.describe.name  !='Respuesta__c') || v.fieldDescribe.describe.type == 'phone' || v.fieldDescribe.describe.type== 'email' || v.fieldDescribe.describe.type== 'textarea' }">
         <aura:renderif isTrue="{!v.fieldDescribe.editable}">            
             <input value="{!v.simpleOutput}" onblur="{!c.updateRecord}" class="slds-input slds-input--small"/>               
             <aura:set attribute="else">
