@@ -36,9 +36,10 @@
     	console.log("nav invoked, get id first");
 
     	console.log(event.target);
+    	console.log("EL ID ES:");
     	var recordId = event.target.id;
     	console.log(recordId);
-
+    	console.log("Invocando acción...");
     	var navEvt = $A.get("e.force:navigateToSObject");
 	    navEvt.setParams({
 	      "recordId": recordId

@@ -1,4 +1,11 @@
-({
+({  
+    isImage : function(component) {
+        var texto =  component.get("v.simpleOutput");
+        console.log("TEXTO "+texto);
+        console.log("Resultado "+texto.startsSwith('<img'))
+        return texto.startsSwith('<img');
+    },
+
     doInit : function(component) {
         var record = component.get("v.record");
         var fieldDescribe = component.get("v.fieldDescribe");

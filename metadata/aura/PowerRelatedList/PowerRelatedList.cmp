@@ -62,7 +62,7 @@
 							<aura:iteration items="{!v.displayFieldsArray}" var="field" start="0" end="1">
 								<td class="{!'slds-size--1-of-' + v.displayFieldsArray.length}" data-label="{!field.describe.label}">
 									<a onclick="{!c.navToRecord}" id="{!record.Id}">
-										<c:SingleFieldDisplayer record="{!record}" fieldDescribe="{!field}"/>
+										<c:SingleFieldDisplayer id="{!record.Id}" record="{!record}" fieldDescribe="{!field}"/>
 									</a>
 								</td>
 							</aura:iteration>

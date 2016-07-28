@@ -1,13 +1,30 @@
 <aura:component controller="PowerRelatedListCtrl">
     <aura:attribute name="record" type="object" required="true"/>
     <aura:attribute name="fieldDescribe" type="object" required="true"/>
-    
+    <aura:attribute name="id" type="string" required="false"/>
     <aura:attribute name="simpleOutput" type="string" required="false"/>
-    
+    <aura:method name="isImage" action="{!c.isImage}" access="public" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
+    <!-- type=Image -->
+
+    <aura:if isTrue="{!and(v.fieldDescribe.describe.type == 'string' ,v.record.name =='Respuesta__c')}">
+        <ui:outputRichText value="{!v.simpleOutput}"/>
+
+    </aura:if>  
+        <!-- type=textarea -->
+<!--
+    <aura:if isTrue="{!v.fieldDescribe.describe.type== 'textarea'}">
+                <aura:if isTrue="{!v.fieldDescribe.editable}">            
+            <input value="{!v.simpleOutput}" onblur="{!c.updateRecord}" class="slds-input slds-input-small"/>               
+            <aura:set attribute="else">
+                <ui:outputRichText value="{!v.simpleOutput}"/>                                                
+            </aura:set>
+        </aura:if> 
+    </aura:if>    
+-->
     <!-- types=string, phone, email -->
-    <aura:renderif isTrue="{!v.fieldDescribe.describe.type == 'string' || v.fieldDescribe.describe.type == 'phone' || v.fieldDescribe.describe.type== 'email'}">
+    <aura:renderif isTrue="{!and(v.fieldDescribe.describe.type == 'string', v.record.name !='Respuesta__c') || v.fieldDescribe.describe.type == 'phone' || v.fieldDescribe.describe.type== 'email' || v.fieldDescribe.describe.type== 'textarea' }">
         <aura:renderif isTrue="{!v.fieldDescribe.editable}">            
             <input value="{!v.simpleOutput}" onblur="{!c.updateRecord}" class="slds-input slds-input--small"/>               
             <aura:set attribute="else">
