@@ -1,12 +1,8 @@
 ({  
-    isImage : function(component) {
-        var texto =  component.get("v.simpleOutput");
-        console.log("TEXTO "+texto);
-        console.log("Resultado "+texto.startsSwith('<img'))
-        return texto.startsSwith('<img');
-    },
+   
 
     doInit : function(component) {
+
         var record = component.get("v.record");
         var fieldDescribe = component.get("v.fieldDescribe");
         console.log(record);
@@ -23,6 +19,15 @@
         console.log(fieldDescribe.original + ":" + output);
         
         component.set("v.simpleOutput", output);
+       if (output!== undefined && typeof output === 'string') {
+      //  component.set("v.Image", output.indexOf("<img")!==0);
+      
+      var str = output;
+      var n = str.includes("<img");
+      component.set("v.Image", n);
+
+        }
+         console.log("Prueba: "+component.get("v.Image"));
     },
     
     changePicklist: function(component, event){

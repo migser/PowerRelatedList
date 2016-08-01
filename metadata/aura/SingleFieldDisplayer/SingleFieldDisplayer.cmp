@@ -3,13 +3,14 @@
     <aura:attribute name="fieldDescribe" type="object" required="true"/>
     <aura:attribute name="id" type="string" required="false"/>
     <aura:attribute name="simpleOutput" type="string" required="false"/>
-    <aura:method name="isImage" action="{!c.isImage}" access="public" />
+    <aura:attribute name="Image" type="boolean" required="false" default="false"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
     <!-- type=Image -->
 
-    <aura:if isTrue="{!and(v.fieldDescribe.describe.type == 'string' ,v.fieldDescribe.describe.name =='Respuesta__c')}">
+    <aura:if isTrue="{!and(v.fieldDescribe.describe.type == 'string' ,v.Image)}">
         <ui:outputRichText value="{!v.simpleOutput}"/>
+        
 
     </aura:if>  
         <!-- type=textarea -->

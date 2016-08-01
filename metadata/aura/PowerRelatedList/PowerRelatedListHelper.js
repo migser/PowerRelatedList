@@ -71,8 +71,9 @@
             var output = JSON.parse(a.getReturnValue());
             component.set("v.pluralLabel", output.objectProperties.pluralLabel);
             console.log(output.fields);
-            //now, only get the ones that are in the displayfieldsList            
-            console.log(fieldsArray);
+            //now, only get the ones that are in the displayfieldsList  
+
+            console.log("Valores "+output.fields);
             
             _.forEach(fieldsArray, function(value){
                 //check for reference dot

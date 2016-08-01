@@ -52,6 +52,8 @@ public with sharing class PowerRelatedListCtrl {
         Map<String, Schema.SObjectField> fieldMap = sobjResult.fields.getMap();
         
         List<Object> fields = new List<Object>();
+      
+
         for (String key : fieldMap.keySet()) {
             Schema.DescribeFieldResult descField = fieldMap.get(key).getDescribe();
             Map<String, Object> field = new Map<String, Object>();
@@ -83,6 +85,18 @@ public with sharing class PowerRelatedListCtrl {
             
             fields.add(field);
         }
+
+          // MIGUEL: Es Imagen?
+    /*    String query = 'SELECT ';
+        for (Integer i = 0; i<fields.length()-1;i++ ) {
+            
+            query = query + fields[i].get('name') + ',';
+        }
+
+        query = query + fields[fields.length()-1].get('name') + 'FROM '+ objtype +' LIMIT 1';
+
+        List<Object> r = Database.query(query);
+        */
         
         Map<String, Object> result = new Map<String, Object>();
         result.put('fields', fields);
